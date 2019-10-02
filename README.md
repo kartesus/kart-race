@@ -22,6 +22,7 @@ BestLapAchieved = Struct.new(:t, :id, :lap, :time)
 AverageSpeedUpdated = Struct.new(:t, :id, :speed)
 RankingPositionsChanged = Struct.new(:t, :ranking)
 RaceFinished = Struct.new(:t, :time)
+DriverFinished = Struct.new(:t, :time_after_race_finished)
 ```
 
 ## Running tests
