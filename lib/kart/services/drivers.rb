@@ -1,11 +1,24 @@
-module Kart::Services::Drivers
-  def self.from(log)
-    log.inject({found: [], data: []}) do |memo, lap|
-      unless memo[:found].include? lap.id
-        memo[:found].push(lap.id)
-        memo[:data].push(Kart::Values::NewDriverIdentified.new(lap.t, lap.id, lap.name))
-      end
-      memo
-    end[:data]
+module Kart::Services
+  class Drivers
+    include Enumerable
+
+    def initialize
+      @found = []
+      @data = []
+    end
+
+    def process(lap)
+      return if @found.include? lap.id
+      @found.push(lap.id)
+      @data.push(Kart::Values::NewDriverIdentified.new(lap.t, lap.id, lap.name).freeze)
+    end
+
+    def each(&block)
+      @data.each(&block)
+    end
+
+    def | other
+      @data | other.to_a
+    end
   end
 end

@@ -18,5 +18,9 @@ module Kart::Values
     def <=> other
       @in_milliseconds <=> other.in_milliseconds
     end
+
+    def inspect
+      @to_s
+    end
   end
 end
