@@ -3,19 +3,12 @@ class LapCompletedTest < Minitest::Test
     @lap = Kart::Values::LapCompleted.new(0, "038", "F.MASSA", "1", "1:02.852", "44,275")
   end
 
-  def test_id_was_processed
-    assert_equal(@lap.id, 38)
-  end
-
-  def test_lap_was_processed
-    assert_equal(@lap.lap, 1)
-  end
-
-  def test_time_was_processed
-    assert_equal(@lap.time, 62852)
-  end
-
-  def test_speed_was_processed
-    assert_equal(@lap.speed, BigDecimal("44.275"))
+  def test_lap_completed
+    assert @lap.t == 0
+    assert @lap.id == 38
+    assert @lap.name == "F.MASSA"
+    assert @lap.lap == 1
+    assert @lap.time == 62852
+    assert @lap.speed == BigDecimal("44.275")
   end
 end
