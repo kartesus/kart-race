@@ -9,18 +9,18 @@ module Kart::Values
       @id = id.to_i
       @name = name
       @lap = lap.to_i
-      @time = make_time(time)
-      @speed = make_speed(speed)
+      @time = Timestamp.new(time)
+      @speed = BigDecimal(speed.sub(',','.'))
     end
 
-    private
-    def make_time(time)
-      (m, s, ms) = time.match(/(\d):(\d{2}).(\d{3})/).to_a.drop(1).map(&:to_i)
-      (m * 60 * 1000) + (s * 1000) + ms
-    end
-
-    def make_speed(speed)
-      BigDecimal(speed.sub(',','.'))
+    def == other
+      @t == other.t &&
+      @id == other.id &&
+      @name == other.name &&
+      @lap == other.lap &&
+      @time == other.time &&
+      @speed == other.speed
     end
   end
+
 end
