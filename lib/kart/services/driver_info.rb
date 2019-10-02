@@ -1,5 +1,5 @@
 module Kart::Services
-  class Drivers
+  class DriverInfo
     include Enumerable
 
     def initialize

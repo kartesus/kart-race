@@ -1,4 +1,4 @@
-class DriversTest < Minitest::Test
+class DriverInfoTest < Minitest::Test
   def lap0
     Kart::Values::LapCompleted.new(0, 38, "F.MASSA", 1, "1:02.825", "44,275")
   end
@@ -16,7 +16,7 @@ class DriversTest < Minitest::Test
   end
 
   def test_identifies_one
-    drivers = Kart::Services::Drivers.new
+    drivers = Kart::Services::DriverInfo.new
     drivers.process(lap0)
 
     identified = [Kart::Values::NewDriverIdentified.new(0, 38, "F.MASSA")]
@@ -25,7 +25,7 @@ class DriversTest < Minitest::Test
   end
 
   def test_identifies_first_id
-    drivers = Kart::Services::Drivers.new
+    drivers = Kart::Services::DriverInfo.new
     drivers.process(lap0)
     drivers.process(lap3)
 
@@ -35,7 +35,7 @@ class DriversTest < Minitest::Test
   end
 
   def test_identifies_many
-    drivers = Kart::Services::Drivers.new
+    drivers = Kart::Services::DriverInfo.new
     drivers.process(lap0)
     drivers.process(lap1)
     drivers.process(lap2)
