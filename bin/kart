@@ -1,0 +1,38 @@
+#!/usr/bin/env ruby
+
+require 'pp'
+
+require_relative '../lib/kart'
+
+
+if ARGV[0].nil?
+  $stderr.puts "Usage: kart <FILE>" 
+  exit 1
+end
+
+FILE = File.expand_path(ARGV[0])
+
+begin
+  race_events = Kart::Repositories::RaceEventsRepository.from_file(FILE)
+  score = Kart::Services::Scoring.new(race_events)
+
+  race = score.compute(
+    Kart::Services::GatherDriverInfo.new,
+    Kart::Services::ComputeBestLap.new,
+    Kart::Services::ComputeCompleteLaps.new,
+    Kart::Services::ComputeBestLapOfRace.new,
+    Kart::Services::AverageDriverSpeed.new,
+    Kart::Services::RankingPosition.new,
+    Kart::Services::RaceClock.new
+  )
+
+  pp race
+  # reporter.write(race.to_json)
+
+rescue Kart::Repositories::LogRepository::FileAdapter::NotFound
+  $stderr.puts "Usage: kart <FILE>"
+  $stderr.puts "ERROR: File '#{FILE}' doesn't exists"
+rescue Kart::Repositories::LogRepository::CorruptData
+  $stderr.puts "Usage: kart <FILE>"
+  $stderr.puts "ERROR: File '#{FILE}' isn't a valid race log"
+end
