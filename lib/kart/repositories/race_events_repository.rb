@@ -1,4 +1,4 @@
-module Kart::Repositories::LogRepository
+module Kart::Repositories::RaceEventsRepository
   def self.from_file(filename)
     FileAdapter.new(filename)
   rescue Errno::ENOENT

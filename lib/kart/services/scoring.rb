@@ -1,11 +1,22 @@
 module Kart::Services
-  class RaceInfo
-    def initialize
+  class Scoring
+    def initialize(events)
+      @events = events
       @drivers = {}
     end
 
-    def process(events)
-      events.each do |event|
+    def compute(*services)
+      @events.each do |event|
+        services.each do |s| 
+          update_race s.process(event)
+        end
+      end
+
+      {drivers: @drivers.values}
+    end
+
+    private 
+    def update_race(event)
         case event
         when Kart::Values::NewDriverIdentified
           @drivers[event.id] ||= {}
@@ -14,11 +25,7 @@ module Kart::Services
           @drivers[event.id] ||= {}
           @drivers[event.id].merge!(id: event.id, best_lap: event.time)
         end
-      end
     end
 
-    def to_h
-      {drivers: @drivers.values}.freeze
-    end
   end
 end

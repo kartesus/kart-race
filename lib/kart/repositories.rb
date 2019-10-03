@@ -1,4 +1,4 @@
 module Kart::Repositories
 end
 
-require_relative 'repositories/log_repository'
+require_relative 'repositories/race_events_repository'
