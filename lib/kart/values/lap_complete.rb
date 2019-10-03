@@ -1,7 +1,7 @@
 require 'bigdecimal'
 
 module Kart::Values
-  class LapCompleted
+  class LapComplete
     attr_reader :t, :id, :name, :lap, :time, :speed
 
     def initialize(t, id, name, lap, time, speed)

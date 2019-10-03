@@ -1,9 +1,9 @@
 class ComputeBestLapsTest < Minitest::Test
   def laps
     [
-      Kart::Values::LapCompleted.new(0, 38, "F.MASSA", 1, "1:02.825", "44,275"),
-      Kart::Values::LapCompleted.new(2, 38, "F.MASSA", 2, "1:03.170", "44,073"),
-      Kart::Values::LapCompleted.new(1, 38, "F.MASSA", 3, "1:02.769", "44,334")
+      Kart::Values::LapComplete.new(0, 38, "F.MASSA", 1, "1:02.825", "44,275"),
+      Kart::Values::LapComplete.new(2, 38, "F.MASSA", 2, "1:03.170", "44,073"),
+      Kart::Values::LapComplete.new(1, 38, "F.MASSA", 3, "1:02.769", "44,334")
     ]
   end
 

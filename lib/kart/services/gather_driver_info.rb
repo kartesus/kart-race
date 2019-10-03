@@ -1,7 +1,5 @@
 module Kart::Services
   class GatherDriverInfo
-    include Enumerable
-
     def initialize
       @found = []
     end

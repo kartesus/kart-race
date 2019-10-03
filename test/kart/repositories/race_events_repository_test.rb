@@ -30,8 +30,8 @@ class LogRepositoryFileAdapterTest < Minitest::Test
     assert @adapter.kind_of?(Enumerable)
   end
 
-  def test_produces_completed_laps
-    lap = Kart::Values::LapCompleted.new(0, "038", "F.MASSA", "1", "1:02.852", "44,275")
+  def test_produces_complete_laps
+    lap = Kart::Values::LapComplete.new(0, "038", "F.MASSA", "1", "1:02.852", "44,275")
     assert @adapter.first == lap
   end
 

@@ -30,7 +30,7 @@ module Kart::Repositories::RaceEventsRepository
 
           raise CorruptData if data.empty?
 
-          Kart::Values::LapCompleted.new(*data.unshift(i)).freeze
+          Kart::Values::LapComplete.new(*data.unshift(i)).freeze
         end
     end
 

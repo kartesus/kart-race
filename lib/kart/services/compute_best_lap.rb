@@ -1,7 +1,5 @@
 module Kart::Services
   class ComputeBestLap
-    include Enumerable
-
     def initialize
       @best_laps = {}
     end

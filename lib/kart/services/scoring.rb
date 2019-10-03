@@ -3,6 +3,7 @@ module Kart::Services
     def initialize(events)
       @events = events
       @drivers = {}
+      @race = {}
     end
 
     def compute(*services)
@@ -12,7 +13,8 @@ module Kart::Services
         end
       end
 
-      {drivers: @drivers.values}
+      { drivers: @drivers.values, 
+        race: @race }
     end
 
     private 
@@ -24,6 +26,19 @@ module Kart::Services
         when Kart::Values::BestLapAchieved
           @drivers[event.id] ||= {}
           @drivers[event.id].merge!(id: event.id, best_lap: event.time)
+        when Kart::Values::NewLapComplete
+          @drivers[event.id] ||= {}
+          @drivers[event.id].merge!(id: event.id, complete_laps: event.lap)
+        when Kart::Values::AverageSpeedUpdated
+          @drivers[event.id] ||= {}
+          @drivers[event.id].merge!(id: event.id, average_speed: event.speed)
+        when Kart::Values::PositionUpdated
+          @drivers[event.id] ||= {}
+          @drivers[event.id].merge!(id: event.id, position: event.position)
+        when Kart::Values::BestLapOfRaceAchieved
+          @race[:best_lap] = event.time
+        when Kart::Values::RaceFinished
+          @race[:time] = event.time
         end
     end
 
